@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portal Ball Bounce Game</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #0f172a;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+      gap: 20px;
+    }
+
+    .stage {
+      position: relative;
+      width: 500px;
+      height: 450px;
+      background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+    }
+
+    /* Base Ball Style */
+    .ball {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      bottom: 40px;
+      animation-iteration-count: infinite;
+      animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1);
+    }
+
+    /* Ball 1 - Cyan (Left Lane) */
+    .ball-1 {
+      left: 100px;
+      background: radial-gradient(circle at 30% 30%, #38bdf8, #1d4ed8);
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.6);
+      animation-name: bounceBall1;
+      animation-duration: 2.4s;
+    }
+
+    /* Ball 2 - Green (Center Lane) */
+    .ball-2 {
+      left: 220px;
+      background: radial-gradient(circle at 30% 30%, #4ade80, #15803d);
+      box-shadow: 0 0 15px rgba(74, 222, 128, 0.6);
+      animation-name: bounceBall2;
+      animation-duration: 2.4s;
+      animation-delay: -0.8s;
+    }
+
+    /* Ball 3 - Pink (Right Lane) */
+    .ball-3 {
+      left: 340px;
+      background: radial-gradient(circle at 30% 30%, #f43f5e, #be123c);
+      box-shadow: 0 0 15px rgba(244, 63, 94, 0.6);
+      animation-name: bounceBall3;
+      animation-duration: 2.4s;
+      animation-delay: -1.6s;
+    }
+
+    /* Dynamic Tracking Portal */
+    .portal {
+      position: absolute;
+      bottom: 20px;
+      left: 70px;
+      width: 120px;
+      height: 20px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse at center, #a855f7 0%, #6366f1 40%, transparent 70%);
+      border: 2px solid #c084fc;
+      box-shadow: 0 0 20px #a855f7, inset 0 0 15px #6366f1;
+      animation: catchAndBounce 2.4s ease-in-out infinite;
+    }
+
+    /* Bouncing & Impact Physics Keyframes */
+    @keyframes bounceBall1 {
+      0%, 100% { transform: translateY(-320px) scale(1, 1); }
+      45%      { transform: translateY(-10px) scale(0.85, 1.2); }
+      50%      { transform: translateY(0px) scale(1.3, 0.6); } /* Impact squish */
+      55%      { transform: translateY(-20px) scale(0.9, 1.1); }
+    }
+
+    @keyframes bounceBall2 {
+      0%, 100% { transform: translateY(-320px) scale(1, 1); }
+      45%      { transform: translateY(-10px) scale(0.85, 1.2); }
+      50%      { transform: translateY(0px) scale(1.3, 0.6); }
+      55%      { transform: translateY(-20px) scale(0.9, 1.1); }
+    }
+
+    @keyframes bounceBall3 {
+      0%, 100% { transform: translateY(-320px) scale(1, 1); }
+      45%      { transform: translateY(-10px) scale(0.85, 1.2); }
+      50%      { transform: translateY(0px) scale(1.3, 0.6); }
+      55%      { transform: translateY(-20px) scale(0.9, 1.1); }
+    }
+
+    /* Portal Catching Motion */
+    @keyframes catchAndBounce {
+      /* Catch Ball 1 (Left) */
+      0% { transform: translateX(0px) scale(1); }
+      16% { transform: translateX(0px) scale(1.2, 0.7); box-shadow: 0 0 35px #a855f7; }
+      20% { transform: translateX(0px) scale(1); }
+
+      /* Slide & Catch Ball 2 (Center) */
+      33% { transform: translateX(120px) scale(1); }
+      49% { transform: translateX(120px) scale(1.2, 0.7); box-shadow: 0 0 35px #4ade80; }
+      53% { transform: translateX(120px) scale(1); }
+
+      /* Slide & Catch Ball 3 (Right) */
+      66% { transform: translateX(240px) scale(1); }
+      82% { transform: translateX(240px) scale(1.2, 0.7); box-shadow: 0 0 35px #f43f5e; }
+      86% { transform: translateX(240px) scale(1); }
+    }
+
+    /* Navigation Button */
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 24px;
+      background: linear-gradient(135deg, #38bdf8, #6366f1);
+      color: #ffffff;
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 50px;
+      box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .nav-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="stage">
+    <div class="ball ball-1"></div>
+    <div class="ball ball-2"></div>
+    <div class="ball ball-3"></div>
+    <div class="portal"></div>
+  </div>
+<nav class="bottom-nav">
+  <!-- Back Button (Points Left) -->
+  <a href="ball-2.html" class="nav-btn nav-prev">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M19 12H5M12 19l-7-7 7-7"/>
+    </svg>
+    <span>Portal Game</span>
+  </a>
+
+  <!-- Forward Button (Points Right) -->
+  <a href="cal.html" class="nav-btn nav-next">
+    <span>5-Ball Juggle</span>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M5 12h14M12 5l7 7-7 7"/>
+    </svg>
+  </a>
+</nav>
+
+</body>
+</html>

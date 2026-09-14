@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Neon Calculator</title>
+    <link rel="stylesheet" href="./css/cal.css">
+</head>
+<body>
+
+<div class="glow-bg"></div>
+<div class="calculator">
+    <!-- Top Header Bar with Mode Toggle -->
+    <div class="calc-header">
+        <span id="page-title">Standard</span>
+        <button class="toggle-btn" onclick="togglePage()">Mode &#8644;</button>
+    </div>
+
+    <div class="display-container">
+        <input type="text" class="display" id="display" disabled placeholder="0">
+    </div>
+
+    <!-- Page Wrapper for Transitions -->
+    <div class="pages-wrapper" id="pages-wrapper">
+        
+        <!-- Page 1: Standard Calculator -->
+        <div class="page" id="page-1">
+            <div class="keypad">
+                <button class="clear" onclick="clearDisplay()">C</button>
+                <button class="clear" onclick="deleteLast()">DEL</button>
+                <button class="operator" onclick="calculateSquareRoot()">&radic;</button>
+                <button class="operator" onclick="calculatePercentage()">%</button>
+
+                <button class="operator" onclick="appendValue('**')">x&#x207F;</button>
+                <button class="operator" onclick="appendValue('/')">&divide;</button>
+                <button class="operator" onclick="appendValue('*')">&times;</button>
+                <button class="operator" onclick="appendValue('-')">-</button>
+
+                <button onclick="appendValue('7')">7</button>
+                <button onclick="appendValue('8')">8</button>
+                <button onclick="appendValue('9')">9</button>
+                <button class="operator" onclick="appendValue('+')">+</button>
+
+                <button onclick="appendValue('4')">4</button>
+                <button onclick="appendValue('5')">5</button>
+                <button onclick="appendValue('6')">6</button>
+                <button class="operator" onclick="appendValue('.')">.</button>
+
+                <button onclick="appendValue('1')">1</button>
+                <button onclick="appendValue('2')">2</button>
+                <button onclick="appendValue('3')">3</button>
+                <button class="equal" style="grid-row: span 2; height: 100%;" onclick="calculate()">=</button>
+
+                <button onclick="appendValue('0')" style="grid-column: span 3;">0</button>
+            </div>
+        </div>
+
+        <!-- Page 2: Advanced Functions / Scientific Page -->
+        <div class="page" id="page-2">
+            <div class="keypad-2">
+                <button class="clear" style="grid-column: span 1;" onclick="clearDisplay()">C</button>
+                <button class="operator" onclick="appendMathFunc('Math.sin')">sin</button>
+                <button class="operator" onclick="appendMathFunc('Math.cos')">cos</button>
+                <button class="operator" onclick="appendMathFunc('Math.tan')">tan</button>
+                <button class="operator" onclick="appendMathFunc('Math.log10')">log</button>
+
+                <button class="operator" onclick="appendMathFunc('Math.log')">ln</button>
+                <button class="operator" onclick="appendValue('Math.PI')">&pi;</button>
+                <button class="operator" onclick="appendValue('Math.E')">e</button>
+                <button class="operator" onclick="appendValue('(')">(</button>
+
+                <button class="operator" onclick="appendValue(')')">)</button>
+                <button class="operator" onclick="calculateFactorial()">n!</button>
+                <button class="operator" onclick="appendValue('**2')">x&sup2;</button>
+                <button class="operator" onclick="appendValue('**3')">x&sup3;</button>
+
+                <button class="operator" style="grid-column: span 1;" onclick="appendMathFunc('Math.abs')">|x|</button>
+                
+            </div>
+            <div class="keypad-3">
+                <button class="operator" onclick="appendValue('/')">&divide;</button>
+                <button class="operator" onclick="appendValue('*')">&times;</button>
+                <button class="operator" onclick="appendValue('-')">-</button>
+
+                <button onclick="appendValue('7')">7</button>
+                <button onclick="appendValue('8')">8</button>
+                <button onclick="appendValue('9')">9</button>
+                <button class="operator" onclick="appendValue('+')">+</button>
+
+                <button onclick="appendValue('4')">4</button>
+                <button onclick="appendValue('5')">5</button>
+                <button onclick="appendValue('6')">6</button>
+                <button class="operator" onclick="appendValue('.')">.</button>
+
+                <button onclick="appendValue('1')">1</button>
+                <button onclick="appendValue('2')">2</button>
+                <button onclick="appendValue('3')">3</button>
+                <button class="equal" style="grid-row: span 2; height: 100%;" onclick="calculate()">=</button>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="script/cal.js"></script>
+</body>
+
+</html>

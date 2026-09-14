@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>5-Ball Juggling Animation</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #0f172a;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    .stage {
+      position: relative;
+      width: 600px;
+      height: 500px;
+      border-radius: 20px;
+      background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Base Ball Setup (Scaled Up) */
+    .ball {
+      position: absolute;
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      left: 50%;
+      top: 50%;
+      margin-left: -45px;
+      margin-top: -45px;
+      animation-iteration-count: infinite;
+      animation-timing-function: ease-in-out;
+    }
+
+    /* Individual Color Themes and Motion Paths */
+    .ball-1 {
+      background: radial-gradient(circle at 35% 35%, #ff4b4b, #a80000);
+      box-shadow: 0 10px 20px rgba(255, 75, 75, 0.4);
+      animation-name: juggle1;
+      animation-duration: 3.2s;
+    }
+
+    .ball-2 {
+      background: radial-gradient(circle at 35% 35%, #38bdf8, #0369a1);
+      box-shadow: 0 10px 20px rgba(56, 189, 248, 0.4);
+      animation-name: juggle2;
+      animation-duration: 2.8s;
+      animation-delay: -0.5s;
+    }
+
+    .ball-3 {
+      background: radial-gradient(circle at 35% 35%, #4ade80, #15803d);
+      box-shadow: 0 10px 20px rgba(74, 222, 128, 0.4);
+      animation-name: juggle3;
+      animation-duration: 3.6s;
+      animation-delay: -1.1s;
+    }
+
+    .ball-4 {
+      background: radial-gradient(circle at 35% 35%, #facc15, #a16207);
+      box-shadow: 0 10px 20px rgba(250, 204, 21, 0.4);
+      animation-name: juggle4;
+      animation-duration: 3.0s;
+      animation-delay: -1.7s;
+    }
+
+    .ball-5 {
+      background: radial-gradient(circle at 35% 35%, #c084fc, #6b21a8);
+      box-shadow: 0 10px 20px rgba(192, 132, 252, 0.4);
+      animation-name: juggle5;
+      animation-duration: 3.4s;
+      animation-delay: -2.3s;
+    }
+
+    /* Keyframe Animations for Asynchronous Juggling */
+    @keyframes juggle1 {
+      0%, 100% { transform: translate(-180px, 120px) scale(1); z-index: 1; }
+      25%      { transform: translate(-60px, -140px) scale(1.15); z-index: 5; }
+      50%      { transform: translate(160px, 60px) scale(0.9); z-index: 2; }
+      75%      { transform: translate(40px, -180px) scale(1.05); z-index: 4; }
+    }
+
+    @keyframes juggle2 {
+      0%, 100% { transform: translate(180px, 100px) scale(0.95); z-index: 2; }
+      30%      { transform: translate(-140px, -160px) scale(1.1); z-index: 4; }
+      65%      { transform: translate(-80px, 140px) scale(0.85); z-index: 1; }
+      85%      { transform: translate(100px, -100px) scale(1.2); z-index: 5; }
+    }
+
+    @keyframes juggle3 {
+      0%, 100% { transform: translate(0px, -190px) scale(1.2); z-index: 5; }
+      33%      { transform: translate(170px, 110px) scale(0.85); z-index: 1; }
+      66%      { transform: translate(-170px, 80px) scale(1.05); z-index: 3; }
+    }
+
+    @keyframes juggle4 {
+      0%, 100% { transform: translate(-120px, 40px) scale(0.9); z-index: 2; }
+      20%      { transform: translate(130px, -170px) scale(1.1); z-index: 4; }
+      55%      { transform: translate(-30px, 160px) scale(1.2); z-index: 5; }
+      80%      { transform: translate(-190px, -80px) scale(0.85); z-index: 1; }
+    }
+
+    @keyframes juggle5 {
+      0%, 100% { transform: translate(140px, -60px) scale(1.1); z-index: 4; }
+      40%      { transform: translate(-160px, -100px) scale(0.85); z-index: 1; }
+      70%      { transform: translate(20px, 170px) scale(1.15); z-index: 5; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="stage">
+    <div class="ball ball-1"></div>
+    <div class="ball ball-2"></div>
+    <div class="ball ball-3"></div>
+    <div class="ball ball-4"></div>
+    <div class="ball ball-5"></div>
+  </div>
+  <nav class="bottom-nav">
+  <!-- Back Button (Points Left) -->
+  <a href="index.html" class="nav-btn nav-prev">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M19 12H5M12 19l-7-7 7-7"/>
+    </svg>
+    <span>Portal Game</span>
+  </a>
+
+  <!-- Forward Button (Points Right) -->
+  <a href="ping.html" class="nav-btn nav-next">
+    <span>5-Ball Juggle</span>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M5 12h14M12 5l7 7-7 7"/>
+    </svg>
+  </a>
+</nav>
+</body>
+</html>
